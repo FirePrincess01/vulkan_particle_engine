@@ -41,10 +41,10 @@ struct argument_type<R (*)(Args...)>
     static size_t const size = sizeof...(Args);
 
     template<size_t i>
-    using type = std::tuple_element<i, std::tuple<Args...>>::type;
+    using type = typename std::tuple_element<i, std::tuple<Args...>>::type;
 
     template<size_t i>
-    using type_noref = std::remove_reference<type<i>>::type;
+    using type_noref = typename std::remove_reference<type<i>>::type;
 
     template<template<typename...> typename T>
     using apply = T<Args...>;

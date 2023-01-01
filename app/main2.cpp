@@ -1,8 +1,8 @@
 
 
-#include "vulkan_erruption/vulkan_erruption.h"
-#include "vulkan_erruption/shader/simple_shader.h"
-#include "vulkan_erruption/object/simple_object/hello_triangle.h"
+#include "vulkan_particle_engine/vulkan_particle_engine.h"
+#include "vulkan_particle_engine/shader/simple_shader.h"
+#include "vulkan_particle_engine/object/simple_object/hello_triangle.h"
 
 #include <iostream>
 #include <cassert>

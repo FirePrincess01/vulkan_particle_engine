@@ -8,7 +8,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Create the project
-project("vulkan_erruption" CXX)
+project("vulkan_particle_engine" CXX)
 
 # Export compile commands for VSCode C++ Intellisense
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -18,8 +18,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(
-    -fdiagnostics-color
-    -Wall 
+    # -fdiagnostics-color
+    # -W4 
 )
 
 
@@ -35,15 +35,15 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 # add source files
 file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
-    # "source/vulkan_erruption/details/*.cpp"
-    # "source/vulkan_erruption/*.cpp"
-    # "source/vulkan_erruption/*/*.cpp"
-    # "source/vulkan_erruption/shader_object/dynamic_point/*.cpp"
-    "source/vulkan_erruption/render_engine/*.cpp"
-    "source/vulkan_erruption/shader/*.cpp"
-    # "source/vulkan_erruption/shader/vertex_cube_shader/*.cpp"
-    "source/vulkan_erruption/object/dynamic_point_object/*.cpp"
-    "source/vulkan_erruption/object/simple_object/*.cpp"
+    # "source/vulkan_particle_engine/details/*.cpp"
+    # "source/vulkan_particle_engine/*.cpp"
+    # "source/vulkan_particle_engine/*/*.cpp"
+    # "source/vulkan_particle_engine/shader_object/dynamic_point/*.cpp"
+    "source/vulkan_particle_engine/render_engine/*.cpp"
+    "source/vulkan_particle_engine/shader/*.cpp"
+    # "source/vulkan_particle_engine/shader/vertex_cube_shader/*.cpp"
+    "source/vulkan_particle_engine/object/dynamic_point_object/*.cpp"
+    "source/vulkan_particle_engine/object/simple_object/*.cpp"
 )
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES})
@@ -54,12 +54,16 @@ target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES})
 # target_include_directories(${PROJECT_NAME} PRIVATE vcpkg_installed/x64-mingw-static/include)
 # target_link_directories(${PROJECT_NAME} PUBLIC vcpkg_installed/x64-mingw-static/lib)
 
-include_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/include)
-link_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/lib)
-link_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/lib/manual-link)
+# include_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/include)
+# link_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/lib)
+# link_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-mingw-static/lib/manual-link)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC glfw3)
 
+find_package(glfw3 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
+
+find_package(glm CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC glm::glm)
 
 # add vulkan
 find_package(Vulkan REQUIRED)

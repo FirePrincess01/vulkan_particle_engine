@@ -1,8 +1,8 @@
 
 
-// #include "vulkan_erruption/vulkan_erruption.h"
-// #include "vulkan_erruption/shader/vertex_cube_shader/vertex_cube_shader.h"
-// #include "vulkan_erruption/object/dynamic_point_object/dynamic_point_object.h"
+// #include "vulkan_particle_engine/vulkan_particle_engine.h"
+// #include "vulkan_particle_engine/shader/vertex_cube_shader/vertex_cube_shader.h"
+// #include "vulkan_particle_engine/object/dynamic_point_object/dynamic_point_object.h"
 
 // #include <iostream>
 // #include <cassert>

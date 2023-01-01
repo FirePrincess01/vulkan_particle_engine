@@ -38,7 +38,10 @@ target_sources(${EXE_NAME} PRIVATE ${SOURCE_FILES_TEST})
 # Add GTest
 # find_package(GTest CONFIG REQUIRED)
 
-target_link_libraries(${EXE_NAME} PRIVATE gtest gtest_main)
+# target_link_libraries(${EXE_NAME} PRIVATE gtest gtest_main)
+
+find_package(GTest CONFIG REQUIRED)
+target_link_libraries(${EXE_NAME} PRIVATE GTest::gtest GTest::gtest_main)
 
 # enable_testing()
 # include(GoogleTest)

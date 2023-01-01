@@ -129,8 +129,8 @@ inline void Event<void(Args...)>::add(T & object)
     static_assert(Method != nullptr);
 
     mElements.push_back({
-        object: &object,
-        function: &callMethod<Method, T>
+        &object,
+        &callMethod<Method, T>
     });
 }
 
@@ -147,8 +147,8 @@ template <typename T>
 inline void Event<void(Args...)>::add(T & object) 
 {
     mElements.push_back({
-        object: &object,
-        function: &callFunctor<T>
+        &object,
+        &callFunctor<T>
     });
 }
 
@@ -166,8 +166,8 @@ inline void Event<void(Args...)>::add()
     static_assert(Function != nullptr);
 
     mElements.push_back({
-        object: nullptr,
-        function: &callFunction<Function>
+        nullptr,
+        &callFunction<Function>
     });
 }
 

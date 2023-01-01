@@ -1,9 +1,9 @@
 
 
-#include "vulkan_erruption/vulkan_erruption.h"
-#include "vulkan_erruption/shader/advanced_shader.h"
-#include "vulkan_erruption/shader/cube_shader.h"
-#include "vulkan_erruption/object/dynamic_point_object/dynamic_point_object.h"
+#include "vulkan_particle_engine/vulkan_particle_engine.h"
+#include "vulkan_particle_engine/shader/advanced_shader.h"
+#include "vulkan_particle_engine/shader/cube_shader.h"
+#include "vulkan_particle_engine/object/dynamic_point_object/dynamic_point_object.h"
 
 #include <iostream>
 #include <cassert>
@@ -103,8 +103,8 @@ public:
       mView(view),
       mProj(proj)
     {
-        mObj.updateVertexBuffer.add<Cube::updateVertexData>(*this);
-        mObj.updateUniformBuffer.add<Cube::updateUniformData>(*this);
+        mObj.updateVertexBuffer.add<&Cube::updateVertexData>(*this);
+        mObj.updateUniformBuffer.add<&Cube::updateUniformData>(*this);
     }
 
     ConcreteShaderObject<DynamicPointObject, AdvancedShader> & get() {
