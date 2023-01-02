@@ -22,7 +22,7 @@ public:
 
     std::vector<vk::UniqueBuffer> const & getBuffers();
 
-    void update(RenderEngineInterface& engine, size_t const imageIndex, Delegate<void(T *, size_t)> & updateBuffer);
+    void update(RenderEngineInterface& engine, size_t const imageIndex, Delegate<void(std::span<T>)> & updateBuffer);
 
     void clear();
 private:
@@ -30,6 +30,7 @@ private:
 	std::vector<vk::UniqueDeviceMemory> mBufferMemory;
 	std::vector<vk::UniqueBuffer> mBuffers;
 
+	size_t mSize = 0;
     size_t mBufferSize = 0;
 
 	vk::BufferUsageFlagBits const mUsageFlags;
@@ -38,6 +39,7 @@ private:
 template<typename T>
 inline void MemoryMappedBuffer<T>::create(RenderEngineInterface& engine, size_t size) 
 {
+	mSize = size;
     mBufferSize = size * sizeof(T);
 
 	vk::DeviceSize const vkBufferSize = mBufferSize;
@@ -61,7 +63,7 @@ inline std::vector<vk::UniqueBuffer> const & MemoryMappedBuffer<T>::getBuffers()
 }
 
 template<typename T>
-inline void MemoryMappedBuffer<T>::update(RenderEngineInterface& engine, size_t const imageIndex, Delegate<void(T *, size_t)> & updateBuffer)
+inline void MemoryMappedBuffer<T>::update(RenderEngineInterface& engine, size_t const imageIndex, Delegate<void(std::span<T>)> & updateBuffer)
 {
     assert(!mBufferMemory.empty());
     assert(!mBuffers.empty());
@@ -72,8 +74,9 @@ inline void MemoryMappedBuffer<T>::update(RenderEngineInterface& engine, size_t 
     void * memMappedData = engine.getDevice().mapMemory(mem, 0, mBufferSize);
 
 	T * memMappedDataTyped = reinterpret_cast<T *>(memMappedData);
+	std::span<T> memMappedDataSpan(memMappedDataTyped, mSize);
 
-    updateBuffer(memMappedDataTyped, mBufferSize);
+    updateBuffer(memMappedDataSpan);
 
     engine.getDevice().unmapMemory(mem);
 }
