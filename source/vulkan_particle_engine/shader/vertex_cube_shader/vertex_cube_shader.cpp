@@ -66,7 +66,7 @@ DynamicPointShader::SpecializationData VertexCubeShader::getSpecializationInfoFr
 
 
 
-std::vector<char> VertexCubeShader::getVertexShaderCode() const
+std::span<char> VertexCubeShader::getVertexShaderCode() const
 {
 	switch (mShaderType) {
 	default:
@@ -80,7 +80,7 @@ std::vector<char> VertexCubeShader::getVertexShaderCode() const
 }
 
 
-std::vector<char> VertexCubeShader::getGeometryShaderCode() const
+std::span<char> VertexCubeShader::getGeometryShaderCode() const
 {
 	switch (mShaderType) {
 	default:
@@ -94,7 +94,7 @@ std::vector<char> VertexCubeShader::getGeometryShaderCode() const
 }
 
 
-std::vector<char> VertexCubeShader::getFragmentShaderCode() const
+std::span<char> VertexCubeShader::getFragmentShaderCode() const
 {
 	switch (mShaderType) {
 	default:

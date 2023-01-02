@@ -25,7 +25,7 @@ public:
 		vk::BufferUsageFlags const usage, vk::MemoryPropertyFlags const properties, 
 		vk::UniqueBuffer & buffer, vk::UniqueDeviceMemory & bufferMemory) = 0;
 
-	virtual vk::UniqueShaderModule createShaderModule(std::vector<char> const & code) = 0;
+	virtual vk::UniqueShaderModule createShaderModule(std::span<char const> const & code) = 0;
 
 	virtual vk::SampleCountFlagBits getMaxMsaaSamples() const = 0;
 

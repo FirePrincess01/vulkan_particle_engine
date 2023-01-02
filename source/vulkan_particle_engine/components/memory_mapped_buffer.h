@@ -18,7 +18,7 @@ class MemoryMappedBuffer
 public:
 	MemoryMappedBuffer(vk::BufferUsageFlagBits usageFlags) : mUsageFlags(usageFlags) {}
 
-	void createVertexBuffer(RenderEngineInterface& engine, size_t bufferSize);
+	void create(RenderEngineInterface& engine, size_t bufferSize);
 
     std::vector<vk::UniqueBuffer> const & getBuffers();
 
@@ -36,11 +36,11 @@ private:
 };
 
 template<typename T>
-inline void MemoryMappedBuffer<T>::createVertexBuffer(RenderEngineInterface& engine, size_t bufferSize) 
+inline void MemoryMappedBuffer<T>::create(RenderEngineInterface& engine, size_t size) 
 {
-    mBufferSize = bufferSize;
+    mBufferSize = size * sizeof(T);
 
-	vk::DeviceSize const vkBufferSize = bufferSize;
+	vk::DeviceSize const vkBufferSize = mBufferSize;
     size_t const swapChainSize = engine.getSwapChainSize();
 
 	mBufferMemory.resize(swapChainSize);
@@ -73,7 +73,7 @@ inline void MemoryMappedBuffer<T>::update(RenderEngineInterface& engine, size_t 
 
 	T * memMappedDataTyped = reinterpret_cast<T *>(memMappedData);
 
-    updateVertexBuffer(memMappedDataTyped, mBufferSize);
+    updateBuffer(memMappedDataTyped, mBufferSize);
 
     engine.getDevice().unmapMemory(mem);
 }

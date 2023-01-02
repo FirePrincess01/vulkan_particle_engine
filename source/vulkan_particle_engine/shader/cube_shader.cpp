@@ -34,14 +34,15 @@ std::vector<vk::VertexInputAttributeDescription> CubeShader::getVertexAttributeD
 	return attributeDescriptions;
 }
 
-vk::VertexInputBindingDescription CubeShader::getVertexBindingDescription() const
+std::vector<vk::VertexInputBindingDescription> CubeShader::getVertexBindingDescription() const
 {
-	vk::VertexInputBindingDescription bindingDescription;
-	bindingDescription.setBinding(0);
-	bindingDescription.setStride(sizeof(VertexBufferElement));
-	bindingDescription.setInputRate(vk::VertexInputRate::eVertex);
+	std::vector<vk::VertexInputBindingDescription> bindingDescriptions;
+	bindingDescriptions.resize(1);
+	bindingDescriptions[0].setBinding(0);
+	bindingDescriptions[0].setStride(sizeof(VertexBufferElement));
+	bindingDescriptions[0].setInputRate(vk::VertexInputRate::eVertex);
 
-	return bindingDescription;
+	return bindingDescriptions;
 }
 
 std::vector<vk::DescriptorSetLayoutBinding> CubeShader::getUniformBindingDescription() const
@@ -59,7 +60,7 @@ std::vector<vk::DescriptorSetLayoutBinding> CubeShader::getUniformBindingDescrip
 	return uboLayoutBinding;
 }
 
-std::vector<char> CubeShader::getVertexShaderCode() const
+std::span<char const> CubeShader::getVertexShaderCode() const
 {	
 	if(mLight == LightingType::Diffuse) {
 		return  cube_shader_vert_spv;
@@ -69,7 +70,7 @@ std::vector<char> CubeShader::getVertexShaderCode() const
 	}
 }
 
-std::vector<char> CubeShader::getGeometryShaderCode() const
+std::span<char const> CubeShader::getGeometryShaderCode() const
 {	
 	if(mLight == LightingType::Diffuse) {
 		return  cube_shader_geom_spv;
@@ -79,7 +80,7 @@ std::vector<char> CubeShader::getGeometryShaderCode() const
 	}
 }
 
-std::vector<char> CubeShader::getFragmentShaderCode() const
+std::span<char const> CubeShader::getFragmentShaderCode() const
 {
 	if(mLight == LightingType::Diffuse) {
 		return cube_shader_frag_spv;

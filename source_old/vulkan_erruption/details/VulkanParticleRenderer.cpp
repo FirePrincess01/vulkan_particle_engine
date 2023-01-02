@@ -1016,7 +1016,7 @@ void VulkanParticleRenderer::createGraphicsPipeline(vk::UniquePipelineLayout& pi
 }
 
 
-vk::UniqueShaderModule VulkanParticleRenderer::createShaderModule(std::vector<char> const& code)
+vk::UniqueShaderModule VulkanParticleRenderer::createShaderModule(std::span<char const> const& code)
 {
 	vk::ShaderModuleCreateInfo createInfo;
 	createInfo.setCodeSize(code.size());

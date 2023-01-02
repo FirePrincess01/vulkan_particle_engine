@@ -170,7 +170,7 @@ private:
 
 		//void createGraphicsPipeline();
 
-			vk::UniqueShaderModule createShaderModule(std::vector<char> const & code) override;
+			vk::UniqueShaderModule createShaderModule(std::span<char const> const & code) override;
 
 		void createFramebuffers();
 

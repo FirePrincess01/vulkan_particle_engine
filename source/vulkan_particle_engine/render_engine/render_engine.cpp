@@ -1027,7 +1027,7 @@ void RenderEngine::createGraphicsPipeline(vk::UniquePipelineLayout& pipelineLayo
 }
 
 
-vk::UniqueShaderModule RenderEngine::createShaderModule(std::vector<char> const& code)
+vk::UniqueShaderModule RenderEngine::createShaderModule(std::span<char const> const& code)
 {
 	vk::ShaderModuleCreateInfo createInfo;
 	createInfo.setCodeSize(code.size());

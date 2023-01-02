@@ -23,22 +23,23 @@ std::vector<vk::VertexInputAttributeDescription> SimpleShader::getVertexAttribut
 	return attributeDescriptions;
 }
 
-vk::VertexInputBindingDescription SimpleShader::getVertexBindingDescription() const
+std::vector<vk::VertexInputBindingDescription> SimpleShader::getVertexBindingDescription() const
 {
-	vk::VertexInputBindingDescription bindingDescription;
-	bindingDescription.setBinding(0);
-	bindingDescription.setStride(mVertexBufferElementSize);
-	bindingDescription.setInputRate(vk::VertexInputRate::eVertex);
+	std::vector<vk::VertexInputBindingDescription> bindingDescription;
+	bindingDescription.resize(1);
+	bindingDescription[0].setBinding(0);
+	bindingDescription[0].setStride(mVertexBufferElementSize);
+	bindingDescription[0].setInputRate(vk::VertexInputRate::eVertex);
 
 	return bindingDescription;
 }
 
-std::vector<char> SimpleShader::getVertexShaderCode() const
+std::span<char const> SimpleShader::getVertexShaderCode() const
 {
 	return simple_shader_vert_spv;
 }
 
-std::vector<char> SimpleShader::getFragmentShaderCode() const
+std::span<char const> SimpleShader::getFragmentShaderCode() const
 {
 	return simple_shader_frag_spv;
 }

@@ -41,9 +41,9 @@ public:
 
 private:
 
-    std::vector<char> getVertexShaderCode() const override;
-	std::vector<char> getGeometryShaderCode() const override;
-	std::vector<char> getFragmentShaderCode() const override;
+    std::span<char> getVertexShaderCode() const override;
+	std::span<char> getGeometryShaderCode() const override;
+	std::span<char> getFragmentShaderCode() const override;
 
 	std::vector<vk::VertexInputAttributeDescription> getVertexAttributeDescriptions() const override;
 	

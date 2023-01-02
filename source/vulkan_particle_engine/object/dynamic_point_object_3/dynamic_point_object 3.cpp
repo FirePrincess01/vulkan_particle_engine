@@ -60,14 +60,15 @@ void DynamicPointObject_NoTemplate::cleanup(RenderEngineInterface& engine)
 }
 
 
-vk::VertexInputBindingDescription DynamicPointObject_NoTemplate::getVertexBindingDescription()
+std::vector<vk::VertexInputBindingDescription> DynamicPointObject_NoTemplate::getVertexBindingDescription()
 {
-	vk::VertexInputBindingDescription bindingDescription;
-	bindingDescription.setBinding(0);
-	bindingDescription.setStride(mVertexBufferElementSize);
-	bindingDescription.setInputRate(vk::VertexInputRate::eVertex);
+	std::vector<vk::VertexInputBindingDescription> bindingDescriptions;
+	bindingDescriptions.resize(1);
+	bindingDescription[0].setBinding(0);
+	bindingDescription[0].setStride(mVertexBufferElementSize);
+	bindingDescription[0].setInputRate(vk::VertexInputRate::eVertex);
 
-	return bindingDescription;
+	return bindingDescriptions;
 }
 
 // Create functions

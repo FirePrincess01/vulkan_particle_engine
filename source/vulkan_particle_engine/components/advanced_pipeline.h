@@ -11,15 +11,16 @@
 #include "vulkan_particle_engine/object/simple_object/hello_triangle_shader.h"
 
 #include <vulkan/vulkan.hpp>
+#include <span>
 
 class AdvancedGraphicsPipeline
 {
 public:
 	void createGraphicsPipeline(RenderEngineInterface& engine, 
-        std::vector<char> const & vertexShaderCode,
-        std::vector<char> const & geometryShaderCode,
-        std::vector<char> const & fragmentShaderCode,
-        vk::VertexInputBindingDescription const & bindingDescription,
+        std::span<char const> const & vertexShaderCode,
+        std::span<char const> const & geometryShaderCode,
+        std::span<char const> const & fragmentShaderCode,
+        std::vector<vk::VertexInputBindingDescription> const & bindingDescriptions,
         std::vector<vk::VertexInputAttributeDescription>const& attributeDescriptions,
 		vk::DescriptorSetLayout const & descriptorSetLayout,
 		vk::PrimitiveTopology const inputTopology
@@ -41,11 +42,11 @@ private:
 
 
 inline void AdvancedGraphicsPipeline::createGraphicsPipeline(RenderEngineInterface& engine, 
-        std::vector<char> const & vertexShaderCode,
-        std::vector<char> const & geometryShaderCode,
-        std::vector<char> const & fragmentShaderCode,
-        vk::VertexInputBindingDescription const & bindingDescription,
-        std::vector<vk::VertexInputAttributeDescription>const& attributeDescriptions,
+        std::span<char const> const & vertexShaderCode,
+        std::span<char const> const & geometryShaderCode,
+        std::span<char const> const & fragmentShaderCode,
+        std::vector<vk::VertexInputBindingDescription> const & bindingDescriptions,
+        std::vector<vk::VertexInputAttributeDescription> const& attributeDescriptions,
 		vk::DescriptorSetLayout const & descriptorSetLayout,
 		vk::PrimitiveTopology const inputTopology
         )
@@ -87,8 +88,8 @@ inline void AdvancedGraphicsPipeline::createGraphicsPipeline(RenderEngineInterfa
 	}
 
 	vk::PipelineVertexInputStateCreateInfo vertexInputInfo;
-	vertexInputInfo.setVertexBindingDescriptionCount(1);
-	vertexInputInfo.setPVertexBindingDescriptions(&bindingDescription);
+	vertexInputInfo.setVertexBindingDescriptionCount(bindingDescriptions.size());
+	vertexInputInfo.setPVertexBindingDescriptions(bindingDescriptions.data());
 	vertexInputInfo.setVertexAttributeDescriptionCount(static_cast<uint32_t>(attributeDescriptions.size()));
 	vertexInputInfo.setPVertexAttributeDescriptions(attributeDescriptions.data());
 

@@ -18,11 +18,11 @@ public:
 
 	using VertexBufferElement = glm::vec3;
 
-	std::vector<char> getVertexShaderCode() const override;
-	std::vector<char> getFragmentShaderCode() const override;
+	std::span<char const> getVertexShaderCode() const override;
+	std::span<char const> getFragmentShaderCode() const override;
 
     std::vector<vk::VertexInputAttributeDescription> getVertexAttributeDescriptions() const override;
-	vk::VertexInputBindingDescription getVertexBindingDescription() const override;
+	std::vector<vk::VertexInputBindingDescription> getVertexBindingDescription() const override;
 
 	size_t getVertexBufferElementSize() const override;
 

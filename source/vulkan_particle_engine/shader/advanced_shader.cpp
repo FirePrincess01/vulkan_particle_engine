@@ -36,14 +36,15 @@ std::vector<vk::VertexInputAttributeDescription> AdvancedShader::getVertexAttrib
 	return attributeDescriptions;
 }
 
-vk::VertexInputBindingDescription AdvancedShader::getVertexBindingDescription() const
+std::vector<vk::VertexInputBindingDescription> AdvancedShader::getVertexBindingDescription() const
 {
-	vk::VertexInputBindingDescription bindingDescription;
-	bindingDescription.setBinding(0);
-	bindingDescription.setStride(sizeof(VertexBufferElement));
-	bindingDescription.setInputRate(vk::VertexInputRate::eVertex);
+	std::vector<vk::VertexInputBindingDescription> bindingDescriptions;
+	bindingDescriptions.resize(1);
+	bindingDescriptions[0].setBinding(0);
+	bindingDescriptions[0].setStride(sizeof(VertexBufferElement));
+	bindingDescriptions[0].setInputRate(vk::VertexInputRate::eVertex);
 
-	return bindingDescription;
+	return bindingDescriptions;
 }
 
 std::vector<vk::DescriptorSetLayoutBinding> AdvancedShader::getUniformBindingDescription() const
@@ -60,7 +61,7 @@ std::vector<vk::DescriptorSetLayoutBinding> AdvancedShader::getUniformBindingDes
 	return uboLayoutBinding;
 }
 
-std::vector<char> AdvancedShader::getVertexShaderCode() const
+std::span<char const> AdvancedShader::getVertexShaderCode() const
 {	
 	if(mLight == LightingType::Diffuse) {
 		return advanced_shader_diffuse_vert_spv;
@@ -70,12 +71,12 @@ std::vector<char> AdvancedShader::getVertexShaderCode() const
 	}
 }
 
-std::vector<char> AdvancedShader::getGeometryShaderCode() const
+std::span<char const> AdvancedShader::getGeometryShaderCode() const
 {	
-	return std::vector<char>();
+	return std::span<char>();
 }
 
-std::vector<char> AdvancedShader::getFragmentShaderCode() const
+std::span<char const> AdvancedShader::getFragmentShaderCode() const
 {
 	if(mLight == LightingType::Diffuse) {
 		return advanced_shader_diffuse_frag_spv;

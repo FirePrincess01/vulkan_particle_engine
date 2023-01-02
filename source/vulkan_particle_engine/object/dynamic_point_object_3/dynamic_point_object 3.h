@@ -30,7 +30,7 @@ public:
 	size_t const mVertexBufferSize;
 	size_t const mStorageBufferSize;
 
-	vk::VertexInputBindingDescription getVertexBindingDescription();
+	std::vector<vk::VertexInputBindingDescription> getVertexBindingDescription();
 
 	// Create functions
 	void createDescriptorSetLayout(RenderEngineInterface& engine);

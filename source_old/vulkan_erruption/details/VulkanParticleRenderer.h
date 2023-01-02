@@ -127,7 +127,7 @@ public:
 
 		//void createGraphicsPipeline();
 
-			vk::UniqueShaderModule createShaderModule(std::vector<char> const & code);
+			vk::UniqueShaderModule createShaderModule(std::span<char const> const & code);
 
 		void createFramebuffers();
 

@@ -16,9 +16,9 @@ class SimpleGraphicsPipeline
 {
 public:
 	void createGraphicsPipeline(RenderEngineInterface& engine, 
-        std::vector<char> const & vertexShaderCode,
-        std::vector<char> const & fragmentShaderCode,
-        vk::VertexInputBindingDescription const & bindingDescription,
+        std::span<char const> const & vertexShaderCode,
+        std::span<char const> const & fragmentShaderCode,
+        std::vector<vk::VertexInputBindingDescription> const & bindingDescription,
         std::vector<vk::VertexInputAttributeDescription>const& attributeDescriptions
         );
 
@@ -38,9 +38,9 @@ private:
 
 
 inline void SimpleGraphicsPipeline::createGraphicsPipeline(RenderEngineInterface& engine, 
-        std::vector<char> const & vertexShaderCode,
-        std::vector<char> const & fragmentShaderCode,
-        vk::VertexInputBindingDescription const & bindingDescription,
+        std::span<char const> const & vertexShaderCode,
+        std::span<char const> const & fragmentShaderCode,
+        std::vector<vk::VertexInputBindingDescription> const & bindingDescription,
         std::vector<vk::VertexInputAttributeDescription>const& attributeDescriptions
         )
 {
@@ -67,8 +67,8 @@ inline void SimpleGraphicsPipeline::createGraphicsPipeline(RenderEngineInterface
     };
 
 	vk::PipelineVertexInputStateCreateInfo vertexInputInfo;
-	vertexInputInfo.setVertexBindingDescriptionCount(1);
-	vertexInputInfo.setPVertexBindingDescriptions(&bindingDescription);
+	vertexInputInfo.setVertexBindingDescriptionCount(bindingDescription.size());
+	vertexInputInfo.setPVertexBindingDescriptions(bindingDescription.data());
 	vertexInputInfo.setVertexAttributeDescriptionCount(static_cast<uint32_t>(attributeDescriptions.size()));
 	vertexInputInfo.setPVertexAttributeDescriptions(attributeDescriptions.data());
 
